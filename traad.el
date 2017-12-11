@@ -465,6 +465,18 @@ necessary. Return the history buffer."
 	 (cons "path" (buffer-file-name))
 	 (cons "offset" (traad-adjust-point (point))))))
 
+;;;###autoload
+(defun traad-move (dest)
+  "Rename the object at the current location."
+  (interactive "bBuffer")
+  (traad--fetch-perform-refresh
+   (buffer-file-name)
+   "/refactor/move"
+   :data (list (cons "dest" (buffer-file-name (get-buffer dest)))
+               (cons "path" (buffer-file-name))
+               (cons "offset" (traad--adjust-point (point))))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Change signature support
 
